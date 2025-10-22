@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- 首頁 -->
+  <url>
+    <loc>https://wangyilong.com/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://wangyilong.com/assets/brand/logo.svg</image:loc>
+      <image:title>王一隆 Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- 音樂歷程 -->
+  <url>
+    <loc>https://wangyilong.com/journey.html</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://wangyilong.com/assets/images/journey_01_coco_lee.jpg</image:loc>
+      <image:title>一隆電音起點 - Coco李玟</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://wangyilong.com/assets/images/journey_02_midimall_base.png</image:loc>
+      <image:title>Midimall 基地</image:title>
+    </image:image>
+  </url>
+
+  <!-- 作品視頻 -->
+  <url>
+    <loc>https://wangyilong.com/videos.html</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 關於 -->
+  <url>
+    <loc>https://wangyilong.com/about.html</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 品牌資產 -->
+  <url>
+    <loc>https://wangyilong.com/assets/brand/logo.svg</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
