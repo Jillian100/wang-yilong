@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="王一隆音樂作品視頻集錦 - 經典金曲與現場演出">
+    <title>作品視頻 - 王一隆 流行音樂作品集</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* AURORA Aesthetic DNA */
+        :root {
+            --color-black-soft: #0a0a0a;
+            --color-white-pure: #ffffff;
+            --gradient-aurora-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --duration-base: 300ms;
+            --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-black-soft);
+            color: var(--color-white-pure);
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp var(--duration-base) var(--ease-aurora);
+            animation-fill-mode: both;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        .nav-link {
+            position: relative;
+            transition: color var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gradient-aurora-1);
+            transition: width var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Video Card Hover Effect */
+        .video-card {
+            transition: all var(--duration-base) var(--ease-aurora);
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .video-thumbnail-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-center;
+        }
+
+        .play-button {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-center;
+            transition: all var(--duration-base) var(--ease-aurora);
+        }
+
+        .video-card:hover .play-button {
+            transform: scale(1.1);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-8 md:py-12 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider uppercase">
+                王一隆 流行音樂作品集
+            </h1>
+            <p class="mt-4 text-gray-400 text-sm md:text-base">Wang Yilong Pop Music Portfolio</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="border-t border-b border-gray-800 py-4 fade-in-up delay-100">
+        <div class="container mx-auto px-4 md:px-6">
+            <ul class="flex justify-center items-center space-x-6 md:space-x-12 text-sm md:text-base uppercase tracking-wide">
+                <li><a href="index.html" class="nav-link text-gray-400 hover:text-white">Home</a></li>
+                <li><a href="journey.html" class="nav-link text-gray-400 hover:text-white">Journey</a></li>
+                <li><a href="videos.html" class="nav-link text-white font-medium">Videos</a></li>
+                <li><a href="about.html" class="nav-link text-gray-400 hover:text-white">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <!-- Page Title -->
+            <div class="text-center mb-12 fade-in-up delay-200">
+                <h2 class="text-3xl md:text-4xl font-light mb-4">
+                    音樂<span class="font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">作品</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    經典金曲與創作歷程，見證華語流行音樂的黃金時代
+                </p>
+            </div>
+
+            <!-- Classic Works Section -->
+            <div class="max-w-6xl mx-auto mb-16">
+                <h3 class="text-2xl font-light mb-8 text-center">
+                    <i class="fas fa-star text-yellow-400 mr-2"></i>
+                    經典作品
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Video Card 1 -->
+                    <div class="video-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden fade-in-up delay-300">
+                        <div class="video-thumbnail">
+                            <div class="video-thumbnail-content">
+                                <div class="play-button">
+                                    <i class="fas fa-play text-purple-600 text-2xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-medium mb-2">你好毒</h4>
+                            <p class="text-sm text-gray-400 mb-3">
+                                <i class="fas fa-microphone text-purple-400 mr-2"></i>
+                                張學友
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                1999年專輯《走過1999》收錄曲目，展現搖滾叛逆風格
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="far fa-calendar mr-1"></i> 1999</span>
+                                <span><i class="fas fa-compact-disc mr-1"></i> 走過1999</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden fade-in-up delay-300">
+                        <div class="video-thumbnail">
+                            <div class="video-thumbnail-content">
+                                <div class="play-button">
+                                    <i class="fas fa-play text-purple-600 text-2xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-medium mb-2">寂寞的戀人啊</h4>
+                            <p class="text-sm text-gray-400 mb-3">
+                                <i class="fas fa-microphone text-pink-400 mr-2"></i>
+                                莫文蔚
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                2000年經典專輯《十二樓的莫文蔚》，李宗盛製作
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="far fa-calendar mr-1"></i> 2000</span>
+                                <span><i class="fas fa-compact-disc mr-1"></i> 十二樓的莫文蔚</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="video-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden fade-in-up delay-300">
+                        <div class="video-thumbnail">
+                            <div class="video-thumbnail-content">
+                                <div class="play-button">
+                                    <i class="fas fa-play text-purple-600 text-2xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-medium mb-2">準備好了沒有</h4>
+                            <p class="text-sm text-gray-400 mb-3">
+                                <i class="fas fa-microphone text-blue-400 mr-2"></i>
+                                蕭亞軒
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                2000年專輯《紅薔薇》，電音舞曲風格代表作
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="far fa-calendar mr-1"></i> 2000</span>
+                                <span><i class="fas fa-compact-disc mr-1"></i> 紅薔薇</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest Work Section -->
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-2xl font-light mb-8 text-center">
+                    <i class="fas fa-trophy text-blue-400 mr-2"></i>
+                    最新獲獎作品
+                </h3>
+
+                <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 backdrop-blur-sm border border-purple-800/50 rounded-lg p-8 text-center">
+                    <div class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
+                        <i class="fas fa-award mr-2"></i>
+                        2024 世界閩南語金曲盛典 - 最佳作曲人獎
+                    </div>
+                    <h4 class="text-2xl font-light mb-4">閩南語作品</h4>
+                    <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                        跨越語種疆界的創作能力，從國語金曲到閩南語獲獎作品，王一隆持續在音樂創作的前線探索與突破
+                    </p>
+                    <div class="inline-flex items-center space-x-2 bg-gray-800 text-gray-400 px-6 py-3 rounded-lg">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="text-sm">作品視頻即將上線</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16 fade-in-up">
+                <p class="text-gray-400 mb-6">更多作品持續更新中</p>
+                <a href="about.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    <span>了解創作背後的故事</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 mt-16">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 王一隆 流行音樂作品集. All Rights Reserved.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Designed with <i class="fas fa-heart text-purple-400"></i> by AURORA
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
