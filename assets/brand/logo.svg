@@ -1,0 +1,67 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 王一隆 Logo - 音樂波形與時代印記 -->
+
+  <!-- 背景圓形 -->
+  <circle cx="100" cy="100" r="95" fill="#0a0a0a" stroke="url(#gradient1)" stroke-width="2"/>
+
+  <!-- 定義漸變 -->
+  <defs>
+    <!-- 主漸變 (極光紫藍) -->
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 時代漸變 (綠紫) -->
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- 音樂波形 - 代表創作歷程 -->
+  <g id="waveform" opacity="0.9">
+    <!-- 1990s 波形 -->
+    <path d="M 30 100 Q 40 80, 50 100 T 70 100" stroke="#764ba2" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- 2000s 波形 (最高峰) -->
+    <path d="M 70 100 Q 85 50, 100 100 T 130 100" stroke="url(#gradient1)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- 2010s 波形 -->
+    <path d="M 130 100 Q 145 75, 160 100 T 170 100" stroke="#00f2fe" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- 中央"隆"字抽象符號 - 三條垂直線代表"隆"的三個山 -->
+  <g id="centermark" transform="translate(100, 100)">
+    <!-- 左山 -->
+    <line x1="-15" y1="15" x2="-15" y2="-25" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <!-- 中山 (最高) -->
+    <line x1="0" y1="20" x2="0" y2="-35" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <!-- 右山 -->
+    <line x1="15" y1="15" x2="15" y2="-25" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- 底部連接 -->
+    <path d="M -15 15 Q 0 20, 15 15" stroke="white" stroke-width="1.5" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- 文字：王一隆 -->
+  <text x="100" y="160" font-family="Noto Sans TC" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">
+    王一隆
+  </text>
+
+  <!-- 副標題：WANG YILONG -->
+  <text x="100" y="175" font-family="Inter" font-size="10" font-weight="400" fill="#999" text-anchor="middle" letter-spacing="3">
+    WANG YILONG
+  </text>
+
+  <!-- 極光粒子裝飾 -->
+  <circle cx="45" cy="60" r="2" fill="#667eea" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="155" cy="65" r="2" fill="#43e97b" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="60" cy="140" r="1.5" fill="#f5576c" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>
