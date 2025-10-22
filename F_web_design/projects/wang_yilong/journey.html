@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="王一隆電子舞曲音樂歷程 - 從Coco李玟到北京工體，見證華語電音發展">
+    <title>電子舞曲音樂歷程 - 王一隆 流行音樂作品集</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* AURORA Aesthetic DNA */
+        :root {
+            --color-black-soft: #0a0a0a;
+            --color-white-pure: #ffffff;
+            --color-gray-500: #737373;
+            --color-gray-800: #2a2a2a;
+            --gradient-aurora-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --duration-base: 300ms;
+            --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-black-soft);
+            color: var(--color-white-pure);
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp var(--duration-base) var(--ease-aurora);
+            animation-fill-mode: both;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+
+        .nav-link {
+            position: relative;
+            transition: color var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gradient-aurora-1);
+            transition: width var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Masonry Gallery */
+        .gallery-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                column-count: 3;
+            }
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            transition: all var(--duration-base) var(--ease-aurora);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-8 md:py-12 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider uppercase">
+                王一隆 流行音樂作品集
+            </h1>
+            <p class="mt-4 text-gray-400 text-sm md:text-base">Wang Yilong Pop Music Portfolio</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="border-t border-b border-gray-800 py-4 fade-in-up delay-100">
+        <div class="container mx-auto px-4 md:px-6">
+            <ul class="flex justify-center items-center space-x-6 md:space-x-12 text-sm md:text-base uppercase tracking-wide">
+                <li><a href="index.html" class="nav-link text-gray-400 hover:text-white">Home</a></li>
+                <li><a href="journey.html" class="nav-link text-white font-medium">Journey</a></li>
+                <li><a href="videos.html" class="nav-link text-gray-400 hover:text-white">Videos</a></li>
+                <li><a href="about.html" class="nav-link text-gray-400 hover:text-white">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <!-- Page Title -->
+            <div class="text-center mb-12 fade-in-up delay-200">
+                <h2 class="text-3xl md:text-4xl font-light mb-4">
+                    電子舞曲音樂<span class="font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">歷程</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    從Coco李玟的電音起點，到北京工體的夜店現場，記錄華語電子音樂的黃金年代
+                </p>
+            </div>
+
+            <!-- Masonry Gallery -->
+            <div class="gallery-grid max-w-7xl mx-auto">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
+                        <img src="assets/images/journey_01_coco_lee.jpg" alt="一隆電音起點(Coco李玟)" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-lg font-medium mb-2">一隆電音起點</h3>
+                            <p class="text-sm text-gray-400">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i>
+                                Coco李玟
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                華語流行音樂與電子舞曲的完美結合，開啟了王一隆電音創作的全新篇章
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
+                        <img src="assets/images/journey_02_midimall_base.png" alt="midimall 基地" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-lg font-medium mb-2">Midimall 基地</h3>
+                            <p class="text-sm text-gray-400">
+                                <i class="fas fa-music text-purple-400 mr-2"></i>
+                                音樂創作中心
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                專業的音樂製作環境，見證無數金曲的誕生
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
+                        <img src="assets/images/journey_03_beijing_club.jpg" alt="北京樂家軒" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-lg font-medium mb-2">北京樂家軒</h3>
+                            <p class="text-sm text-gray-400">
+                                <i class="fas fa-map-marker-alt text-red-400 mr-2"></i>
+                                北京音樂地標
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                90年代北京電子音樂場景的重要據點
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
+                        <img src="assets/images/journey_04_genelec_1038a.png" alt="Genelec 1038A（15吋）" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-lg font-medium mb-2">Genelec 1038A</h3>
+                            <p class="text-sm text-gray-400">
+                                <i class="fas fa-volume-up text-blue-400 mr-2"></i>
+                                專業監聽系統
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                15吋旗艦級監聽音箱，確保每個音符的完美呈現
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5: Video -->
+                <div class="gallery-item">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
+                        <video controls class="w-full" preload="metadata">
+                            <source src="assets/videos/gongti_nightclub.mp4" type="video/mp4">
+                            您的瀏覽器不支援 video 標籤。
+                        </video>
+                        <div class="p-6">
+                            <h3 class="text-lg font-medium mb-2">北京工人體育館 Nightclub</h3>
+                            <p class="text-sm text-gray-400">
+                                <i class="fas fa-video text-pink-400 mr-2"></i>
+                                現場實錄
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                北京最具代表性的電音聖地，萬人狂歡的夜店傳奇
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16 fade-in-up">
+                <a href="about.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    <span>深入了解王一隆</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 mt-16">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 王一隆 流行音樂作品集. All Rights Reserved.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Designed with <i class="fas fa-heart text-purple-400"></i> by AURORA
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

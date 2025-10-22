@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="王一隆 流行音樂作品集 - 華語金曲幕後靈魂，跨越時代的音樂匠人">
+    <title>王一隆 流行音樂作品集 - Official Website</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* AURORA Aesthetic DNA */
+        :root {
+            /* Colors */
+            --color-black-soft: #0a0a0a;
+            --color-white-pure: #ffffff;
+            --color-gray-500: #737373;
+            --color-gray-800: #2a2a2a;
+
+            /* Aurora Gradients */
+            --gradient-aurora-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-aurora-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+            /* Spacing (8px system) */
+            --space-2: 0.5rem;   /* 8px */
+            --space-4: 1rem;     /* 16px */
+            --space-6: 1.5rem;   /* 24px */
+            --space-8: 2rem;     /* 32px */
+            --space-12: 3rem;    /* 48px */
+            --space-16: 4rem;    /* 64px */
+            --space-24: 6rem;    /* 96px */
+
+            /* Animation */
+            --duration-base: 300ms;
+            --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-black-soft);
+            color: var(--color-white-pure);
+            line-height: 1.5;
+        }
+
+        /* AURORA Animation: fadeInUp */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp var(--duration-base) var(--ease-aurora);
+            animation-fill-mode: both;
+        }
+
+        .scale-in {
+            animation: scaleIn var(--duration-base) var(--ease-aurora);
+            animation-fill-mode: both;
+        }
+
+        /* Stagger animation delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+
+        /* Navigation hover effect */
+        .nav-link {
+            position: relative;
+            transition: color var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gradient-aurora-1);
+            transition: width var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Aurora gradient button */
+        .btn-aurora {
+            background: var(--gradient-aurora-1);
+            transition: all var(--duration-base) var(--ease-aurora);
+        }
+
+        .btn-aurora:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero section */
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 0%, rgba(102, 126, 234, 0.1) 0%, transparent 60%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-8 md:py-12 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider uppercase">
+                王一隆 流行音樂作品集
+            </h1>
+            <p class="mt-4 text-gray-400 text-sm md:text-base">Wang Yilong Pop Music Portfolio</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="border-t border-b border-gray-800 py-4 fade-in-up delay-100">
+        <div class="container mx-auto px-4 md:px-6">
+            <ul class="flex justify-center items-center space-x-6 md:space-x-12 text-sm md:text-base uppercase tracking-wide">
+                <li><a href="index.html" class="nav-link text-white font-medium">Home</a></li>
+                <li><a href="journey.html" class="nav-link text-gray-400 hover:text-white">Journey</a></li>
+                <li><a href="videos.html" class="nav-link text-gray-400 hover:text-white">Videos</a></li>
+                <li><a href="about.html" class="nav-link text-gray-400 hover:text-white">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="relative min-h-screen flex items-center justify-center py-16 md:py-24 hero-gradient">
+        <div class="container mx-auto px-4 md:px-6 text-center scale-in delay-200">
+            <!-- Main Content -->
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-light mb-6 tracking-tight">
+                    金曲幕後的<span class="font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">靈魂</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+                    從九零年代金曲推手到2024年獲獎人<br>
+                    跨越時代與曲風的華語流行音樂作曲家
+                </p>
+
+                <!-- Key Achievements -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-12">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-300">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">2024</div>
+                        <div class="text-sm text-gray-400 mt-2">世界閩南語金曲盛典</div>
+                        <div class="text-xs text-gray-500 mt-1">最佳作曲人獎</div>
+                    </div>
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-400">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">20+</div>
+                        <div class="text-sm text-gray-400 mt-2">年創作經驗</div>
+                        <div class="text-xs text-gray-500 mt-1">持續活躍的音樂匠人</div>
+                    </div>
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-400">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">天王</div>
+                        <div class="text-sm text-gray-400 mt-2">張學友 × 莫文蔚 × 蕭亞軒</div>
+                        <div class="text-xs text-gray-500 mt-1">為巨星量身打造金曲</div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
+                    <a href="journey.html" class="btn-aurora text-white px-8 py-4 rounded-lg font-medium inline-flex items-center space-x-2 w-full sm:w-auto justify-center">
+                        <span>探索音樂歷程</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="about.html" class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-medium inline-flex items-center space-x-2 transition-all duration-300 w-full sm:w-auto justify-center">
+                        <span>了解更多</span>
+                        <i class="fas fa-book-open"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 fade-in-up delay-400">
+                <div class="flex flex-col items-center text-gray-500 text-xs uppercase tracking-wider">
+                    <span class="mb-2">Scroll</span>
+                    <i class="fas fa-chevron-down animate-bounce"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 王一隆 流行音樂作品集. All Rights Reserved.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Designed with <i class="fas fa-heart text-purple-400"></i> by AURORA
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
