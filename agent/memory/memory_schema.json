@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ARIA Memory System Schema",
+  "description": "F_web_design AI Agent 記憶系統結構定義",
+  "version": "1.0",
+
+  "memory": {
+    "session": {
+      "current_task": null,
+      "context": {},
+      "decisions": [],
+      "timestamp": null
+    },
+
+    "longterm": {
+      "projects": [],
+      "knowledge_base": {
+        "design_patterns": [],
+        "code_snippets": [],
+        "best_practices": [],
+        "client_preferences": []
+      },
+      "learning_log": [],
+      "statistics": {
+        "total_projects": 0,
+        "average_aesthetic_score": 0,
+        "technologies_used": [],
+        "common_challenges": []
+      }
+    }
+  },
+
+  "project_template": {
+    "id": "",
+    "name": "",
+    "client": "",
+    "date_start": "",
+    "date_complete": "",
+    "type": "",
+    "technologies": [],
+    "design_decisions": [],
+    "challenges": [],
+    "solutions": [],
+    "aesthetic_score": 0,
+    "performance_score": 0,
+    "client_feedback": "",
+    "lessons_learned": [],
+    "reusable_components": [],
+    "urls": {
+      "live": "",
+      "staging": "",
+      "repository": ""
+    }
+  },
+
+  "knowledge_entry_template": {
+    "id": "",
+    "category": "",
+    "title": "",
+    "description": "",
+    "code_example": "",
+    "tags": [],
+    "source_project": "",
+    "created_date": "",
+    "usefulness_score": 0
+  }
+}
