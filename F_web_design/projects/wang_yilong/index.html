@@ -158,6 +158,96 @@
         .hero-gradient {
             background: radial-gradient(circle at 50% 0%, rgba(102, 126, 234, 0.1) 0%, transparent 60%);
         }
+
+        /* Dynamic Card Effects */
+        .dynamic-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 500ms var(--ease-aurora);
+            cursor: pointer;
+        }
+
+        .dynamic-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f5576c, #4facfe, #43e97b, #667eea);
+            background-size: 400% 400%;
+            border-radius: 0.5rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 500ms var(--ease-aurora);
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .dynamic-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .dynamic-card:hover::before {
+            opacity: 1;
+        }
+
+        .dynamic-card .card-content {
+            position: relative;
+            background: #0a0a0a;
+            border-radius: 0.5rem;
+            height: 100%;
+        }
+
+        /* Rotating content animation */
+        @keyframes slideUpFade {
+            0% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .rotating-content {
+            animation: slideUpFade 4s ease-in-out infinite;
+        }
+
+        /* Video Card Styles */
+        .video-card {
+            position: relative;
+            height: 100%;
+            min-height: 200px;
+        }
+
+        .video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .video-card video.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 100%);
+            padding: 1rem;
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -198,20 +288,55 @@
 
                 <!-- Key Achievements -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-12">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-300">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">2024</div>
-                        <div class="text-sm text-gray-400 mt-2">世界閩南語金曲盛典</div>
-                        <div class="text-xs text-gray-500 mt-1">最佳作曲人獎</div>
+                    <!-- Card 1: 2024 最新動態 -->
+                    <div class="dynamic-card fade-in-up delay-300">
+                        <div class="card-content bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6">
+                            <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">2024</div>
+                            <div class="text-sm text-gray-400 font-medium mb-2">最新動態</div>
+                            <div class="space-y-2">
+                                <div class="text-xs text-gray-500 flex items-center">
+                                    <i class="fas fa-music text-purple-400 mr-2"></i>
+                                    單曲《美麗》
+                                </div>
+                                <div class="text-xs text-gray-500 flex items-center">
+                                    <i class="fas fa-music text-pink-400 mr-2"></i>
+                                    單曲《仁》
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-400">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">20+</div>
-                        <div class="text-sm text-gray-400 mt-2">年創作經驗</div>
-                        <div class="text-xs text-gray-500 mt-1">持續活躍的音樂匠人</div>
+
+                    <!-- Card 2: AI 短動畫收藏 -->
+                    <div class="dynamic-card fade-in-up delay-400">
+                        <div class="card-content bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden p-0">
+                            <div class="video-card">
+                                <video class="active" autoplay muted loop playsinline id="video1">
+                                    <source src="assets/ai-videos/ai_girl_1.mp4" type="video/mp4">
+                                </video>
+                                <video muted loop playsinline id="video2">
+                                    <source src="assets/ai-videos/ai_portrait.mp4" type="video/mp4">
+                                </video>
+                                <video muted loop playsinline id="video3">
+                                    <source src="assets/ai-videos/ai_chibi.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <div class="text-sm font-medium text-white flex items-center">
+                                        <i class="fas fa-magic text-cyan-400 mr-2"></i>
+                                        AI 短動畫收藏
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">自動輪播中...</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 fade-in-up delay-400">
-                        <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">天王</div>
-                        <div class="text-sm text-gray-400 mt-2">張學友 × 莫文蔚 × 蕭亞軒</div>
-                        <div class="text-xs text-gray-500 mt-1">為巨星量身打造金曲</div>
+
+                    <!-- Card 3: 天王合作 -->
+                    <div class="dynamic-card fade-in-up delay-400">
+                        <div class="card-content bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6">
+                            <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">天王</div>
+                            <div class="text-sm text-gray-400 mt-2 leading-relaxed">張學友 × 莫文蔚 × 李玟<br>魏如萱 × 李宗盛</div>
+                            <div class="text-xs text-gray-500 mt-2">為巨星量身打造金曲</div>
+                        </div>
                     </div>
                 </div>
 
@@ -249,5 +374,43 @@
             </p>
         </div>
     </footer>
+
+    <!-- Video Carousel Script -->
+    <script>
+        // AI 短動畫自動輪播
+        const videos = [
+            document.getElementById('video1'),
+            document.getElementById('video2'),
+            document.getElementById('video3')
+        ];
+        let currentVideoIndex = 0;
+
+        function switchVideo() {
+            // 移除當前視頻的 active 類
+            videos[currentVideoIndex].classList.remove('active');
+            videos[currentVideoIndex].pause();
+
+            // 切換到下一個視頻
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+
+            // 添加 active 類並播放
+            videos[currentVideoIndex].classList.add('active');
+            videos[currentVideoIndex].play();
+        }
+
+        // 每 8 秒切換一次視頻
+        setInterval(switchVideo, 8000);
+
+        // 確保視頻靜音並循環播放
+        videos.forEach(video => {
+            video.muted = true;
+            video.loop = true;
+        });
+
+        // 啟動第一個視頻
+        if (videos[0]) {
+            videos[0].play().catch(e => console.log('Autoplay blocked:', e));
+        }
+    </script>
 </body>
 </html>
