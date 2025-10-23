@@ -320,11 +320,11 @@
                                     <source src="assets/ai-videos/ai_chibi.mp4" type="video/mp4">
                                 </video>
                                 <div class="video-overlay">
-                                    <div class="text-sm font-medium text-white flex items-center">
-                                        <i class="fas fa-magic text-cyan-400 mr-2"></i>
-                                        AI 短動畫收藏
+                                    <div class="text-sm font-medium text-white flex items-center" id="videoLabel">
+                                        <i class="fas fa-music text-purple-400 mr-2" id="videoIcon"></i>
+                                        <span id="videoText">音樂製作</span>
                                     </div>
-                                    <div class="text-xs text-gray-400 mt-1">自動輪播中...</div>
+                                    <div class="text-xs text-gray-400 mt-1">創作領域展示</div>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +383,17 @@
             document.getElementById('video2'),
             document.getElementById('video3')
         ];
+
+        // 對應的標籤和圖標
+        const labels = [
+            { text: '音樂製作', icon: 'fas fa-music', color: 'text-purple-400' },
+            { text: '視覺設計', icon: 'fas fa-palette', color: 'text-cyan-400' },
+            { text: 'Vibe Dreaming Coding', icon: 'fas fa-code', color: 'text-green-400' }
+        ];
+
         let currentVideoIndex = 0;
+        const videoText = document.getElementById('videoText');
+        const videoIcon = document.getElementById('videoIcon');
 
         function switchVideo() {
             // 移除當前視頻的 active 類
@@ -396,6 +406,13 @@
             // 添加 active 類並播放
             videos[currentVideoIndex].classList.add('active');
             videos[currentVideoIndex].play();
+
+            // 同步更新文字和圖標
+            const currentLabel = labels[currentVideoIndex];
+            videoText.textContent = currentLabel.text;
+
+            // 更新圖標類名
+            videoIcon.className = `${currentLabel.icon} ${currentLabel.color} mr-2`;
         }
 
         // 每 8 秒切換一次視頻
