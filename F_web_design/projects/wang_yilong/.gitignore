@@ -1,0 +1,19 @@
+.vercel
+
+# Environment variables
+.env
+.env.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Original AI videos (keep only renamed versions)
+assets/ai-videos/social_*.mp4
+
+# Original images backup
+assets/images/originals/

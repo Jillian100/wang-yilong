@@ -115,11 +115,80 @@
         .gallery-item {
             break-inside: avoid;
             margin-bottom: 1.5rem;
-            transition: all var(--duration-base) var(--ease-aurora);
+            opacity: 0;
+            animation: fadeInUp 600ms var(--ease-aurora) forwards;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-4px);
+        /* Stagger animation delays for gallery items */
+        .gallery-item:nth-child(1) { animation-delay: 100ms; }
+        .gallery-item:nth-child(2) { animation-delay: 200ms; }
+        .gallery-item:nth-child(3) { animation-delay: 300ms; }
+        .gallery-item:nth-child(4) { animation-delay: 400ms; }
+        .gallery-item:nth-child(5) { animation-delay: 500ms; }
+
+        /* Gallery Card with Aurora Effects */
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 500ms var(--ease-aurora);
+        }
+
+        /* Rainbow gradient border on hover */
+        .gallery-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f5576c, #4facfe, #43e97b, #667eea);
+            background-size: 400% 400%;
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 500ms var(--ease-aurora);
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .gallery-card:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Image container with gloss effect */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.2),
+                transparent
+            );
+            transition: left 0.6s;
+        }
+
+        .gallery-card:hover .image-container::after {
+            left: 100%;
         }
 
         .gallery-item img,
@@ -127,7 +196,56 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 8px;
+            transition: transform 600ms var(--ease-aurora);
+        }
+
+        .gallery-card:hover img,
+        .gallery-card:hover video {
+            transform: scale(1.05);
+        }
+
+        /* Video card special styles */
+        .video-card-container {
+            position: relative;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 10, 0.4);
+            border-radius: 8px 8px 0 0;
+            opacity: 1;
+            transition: opacity 400ms var(--ease-aurora);
+            pointer-events: none;
+        }
+
+        .gallery-card:hover .video-play-overlay {
+            opacity: 0;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.9);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            transition: all 400ms var(--ease-aurora);
+        }
+
+        .gallery-card:hover .play-button {
+            transform: scale(1.1);
+            background: rgba(118, 75, 162, 0.9);
         }
     </style>
 </head>
@@ -171,8 +289,10 @@
             <div class="gallery-grid max-w-7xl mx-auto">
                 <!-- Gallery Item 1 -->
                 <div class="gallery-item">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
-                        <img src="assets/images/journey_01_coco_lee.jpg" alt="一隆電音起點(Coco李玟)" loading="lazy">
+                    <div class="gallery-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
+                        <div class="image-container">
+                            <img src="assets/images/journey_01_coco_lee.jpg" alt="一隆電音起點(Coco李玟)" loading="lazy">
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-medium mb-2">一隆電音起點</h3>
                             <p class="text-sm text-gray-400">
@@ -188,8 +308,10 @@
 
                 <!-- Gallery Item 2 -->
                 <div class="gallery-item">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
-                        <img src="assets/images/journey_02_midimall_base.png" alt="midimall 基地" loading="lazy">
+                    <div class="gallery-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
+                        <div class="image-container">
+                            <img src="assets/images/journey_02_midimall_base.jpg" alt="midimall 基地" loading="lazy">
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-medium mb-2">Midimall 基地</h3>
                             <p class="text-sm text-gray-400">
@@ -205,8 +327,10 @@
 
                 <!-- Gallery Item 3 -->
                 <div class="gallery-item">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
-                        <img src="assets/images/journey_03_beijing_club.jpg" alt="北京樂家軒" loading="lazy">
+                    <div class="gallery-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
+                        <div class="image-container">
+                            <img src="assets/images/journey_03_beijing_club.jpg" alt="北京樂家軒" loading="lazy">
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-medium mb-2">北京樂家軒</h3>
                             <p class="text-sm text-gray-400">
@@ -222,8 +346,10 @@
 
                 <!-- Gallery Item 4 -->
                 <div class="gallery-item">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
-                        <img src="assets/images/journey_04_genelec_1038a.png" alt="Genelec 1038A（15吋）" loading="lazy">
+                    <div class="gallery-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
+                        <div class="image-container">
+                            <img src="assets/images/journey_04_genelec_1038a.jpg" alt="Genelec 1038A（15吋）" loading="lazy">
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-medium mb-2">Genelec 1038A</h3>
                             <p class="text-sm text-gray-400">
@@ -239,11 +365,18 @@
 
                 <!-- Gallery Item 5: Video -->
                 <div class="gallery-item">
-                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden hover:border-gray-700 transition-all">
-                        <video controls class="w-full" preload="metadata">
-                            <source src="assets/videos/gongti_nightclub.mp4" type="video/mp4">
-                            您的瀏覽器不支援 video 標籤。
-                        </video>
+                    <div class="gallery-card bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
+                        <div class="video-card-container image-container">
+                            <video controls class="w-full" preload="metadata" id="gongtiyVideo">
+                                <source src="assets/videos/gongti_nightclub.mp4" type="video/mp4">
+                                您的瀏覽器不支援 video 標籤。
+                            </video>
+                            <div class="video-play-overlay">
+                                <div class="play-button">
+                                    <i class="fas fa-play" style="padding-left: 4px;"></i>
+                                </div>
+                            </div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-medium mb-2">北京工人體育館 Nightclub</h3>
                             <p class="text-sm text-gray-400">
@@ -279,5 +412,128 @@
             </p>
         </div>
     </footer>
+
+    <!-- Enhanced Gallery Script -->
+    <script>
+        // ========================================
+        // 視頻播放優化
+        // ========================================
+        const video = document.getElementById('gongtiyVideo');
+        const videoCard = video.closest('.gallery-card');
+        const playOverlay = videoCard.querySelector('.video-play-overlay');
+
+        // 視頻播放時隱藏 overlay
+        video.addEventListener('play', () => {
+            playOverlay.style.opacity = '0';
+            playOverlay.style.pointerEvents = 'none';
+        });
+
+        // 視頻暫停時顯示 overlay
+        video.addEventListener('pause', () => {
+            playOverlay.style.opacity = '1';
+            playOverlay.style.pointerEvents = 'none';
+        });
+
+        // 視頻結束時顯示 overlay
+        video.addEventListener('ended', () => {
+            playOverlay.style.opacity = '1';
+            playOverlay.style.pointerEvents = 'none';
+        });
+
+        // ========================================
+        // 圖片懶加載優化（Intersection Observer）
+        // ========================================
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+
+        // 觀察所有圖片
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // ========================================
+        // 卡片點擊漣漪效果
+        // ========================================
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        galleryCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // 如果點擊的是視頻控制元件，不觸發漣漪
+                if (e.target.closest('video')) return;
+
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(102, 126, 234, 0.5);
+                    transform: scale(0);
+                    animation: rippleEffect 600ms ease-out;
+                    pointer-events: none;
+                    left: ${x}px;
+                    top: ${y}px;
+                    width: 10px;
+                    height: 10px;
+                `;
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // 定義漣漪動畫
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ========================================
+        // 性能優化：滾動時暫停視頻自動播放
+        // ========================================
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                // 檢查視頻是否在視口中
+                const rect = video.getBoundingClientRect();
+                const isInViewport = (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+
+                // 如果視頻不在視口中且正在播放，暫停它
+                if (!isInViewport && !video.paused) {
+                    video.pause();
+                }
+            }, 150);
+        });
+    </script>
 </body>
 </html>
