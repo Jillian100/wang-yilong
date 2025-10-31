@@ -1,0 +1,23 @@
+{
+  "name": "wang-yilong-website",
+  "version": "2.1.0",
+  "description": "王一隆流行音樂作品集官網 - 自動化工具",
+  "private": true,
+  "scripts": {
+    "push-to-notion": "node scripts/push-to-notion.js",
+    "backup-changelog": "node scripts/backup-changelog.js",
+    "test-notion": "node scripts/test-notion-connection.js",
+    "show-database": "node scripts/get-database-schema.js"
+  },
+  "keywords": [
+    "notion",
+    "automation",
+    "changelog"
+  ],
+  "author": "Jillian",
+  "license": "MIT",
+  "dependencies": {
+    "@notionhq/client": "^2.3.0",
+    "dotenv": "^17.2.3"
+  }
+}

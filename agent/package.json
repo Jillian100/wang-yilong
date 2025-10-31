@@ -1,0 +1,30 @@
+{
+  "name": "aurora-agent",
+  "version": "1.0.0",
+  "description": "AURORA Agent - RAG-powered Frontend Design AI",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "boot": "node boot.js",
+    "sync-memory": "node sync-memory.js",
+    "rag:ingest": "node rag/cli/ingest.js",
+    "rag:search": "node rag/cli/search.js",
+    "rag:init": "node rag/init.js"
+  },
+  "keywords": [
+    "rag",
+    "vector-database",
+    "semantic-search",
+    "ai-agent"
+  ],
+  "author": "AURORA - Chief Design Officer",
+  "license": "MIT",
+  "dependencies": {
+    "@xenova/transformers": "^2.10.0",
+    "pdf-parse": "^1.1.1",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}

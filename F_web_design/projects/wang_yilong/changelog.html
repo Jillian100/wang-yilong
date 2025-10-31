@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="王一隆官網開發日誌 - 記錄網站開發、技術升級與優化的完整歷程">
+    <title>開發日誌 - 王一隆流行音樂作品集</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-black-soft: #0a0a0a;
+            --color-white-pure: #ffffff;
+            --color-gray-500: #737373;
+            --color-gray-800: #2a2a2a;
+            --gradient-aurora-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --duration-base: 300ms;
+            --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-black-soft);
+            color: var(--color-white-pure);
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gradient-aurora-1);
+            transition: width var(--duration-base) var(--ease-aurora);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Changelog Card */
+        .changelog-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 400ms var(--ease-aurora);
+        }
+
+        .changelog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .badge-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        code {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: #a78bfa;
+        }
+
+        pre {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #e0e0e0;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: all 300ms ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .notion-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-aurora-1);
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 300ms ease;
+            margin-top: 1rem;
+        }
+
+        .notion-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-8 md:py-12 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider uppercase">
+                王一隆 流行音樂作品集
+            </h1>
+            <p class="mt-4 text-gray-400 text-sm md:text-base">Wang Yilong Pop Music Portfolio</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="border-t border-b border-gray-800 py-4 fade-in-up">
+        <div class="container mx-auto px-4 md:px-6">
+            <ul class="flex justify-center items-center space-x-6 md:space-x-12 text-sm md:text-base uppercase tracking-wide">
+                <li><a href="index.html" class="nav-link text-gray-400 hover:text-white">Home</a></li>
+                <li><a href="journey.html" class="nav-link text-gray-400 hover:text-white">Journey</a></li>
+                <li><a href="videos.html" class="nav-link text-gray-400 hover:text-white">Videos</a></li>
+                <li><a href="about.html" class="nav-link text-gray-400 hover:text-white">About</a></li>
+                <li><a href="changelog.html" class="nav-link text-white font-medium">Changelog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 md:px-6 py-16 max-w-5xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">開發日誌</h2>
+            <p class="text-gray-400 text-lg">記錄官網開發、技術升級與優化的完整歷程</p>
+        </div>
+
+        <!-- Changelog Entry: 2025-10-23 -->
+        <article class="changelog-card fade-in-up">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <span class="badge badge-purple">v2.1</span>
+                    <span class="text-gray-400 text-sm">2025-10-23</span>
+                </div>
+                <a href="https://www.notion.so/2958f9b3dd28816abf1cc4dad0a113f3" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">
+                    <i class="fas fa-external-link-alt mr-2"></i>Notion 完整版
+                </a>
+            </div>
+
+            <h2>王一隆官網動態效果全面升級</h2>
+
+            <p class="text-gray-300 mb-6">
+                本次升級針對官網首頁的三卡片系統進行了全面優化，特別是中間 AI 短動畫輪播卡片的交互體驗。
+                通過 8 大核心改進，將用戶體驗提升到專業級水準。
+            </p>
+
+            <h3><i class="fas fa-star text-purple-400 mr-2"></i>核心改進清單</h3>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-purple-400 mr-2" style="font-size: 0.5rem;"></i>
+                        進度指示器系統
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        三個動態指示點，當前活躍的會變成紫色漸變條，支持點擊跳轉
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-cyan-400 mr-2" style="font-size: 0.5rem;"></i>
+                        手動控制按鈕
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        左右箭頭按鈕 + 鍵盤快捷鍵（← / →），毛玻璃半透明設計
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-green-400 mr-2" style="font-size: 0.5rem;"></i>
+                        智能暫停機制
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        鼠標懸停自動暫停輪播，離開後自動恢復
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-pink-400 mr-2" style="font-size: 0.5rem;"></i>
+                        視頻過渡動畫
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        Crossfade 交叉淡化 + Ken Burns 縮放效果
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-purple-400 mr-2" style="font-size: 0.5rem;"></i>
+                        標籤同步動畫
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        文字和圖標同步淡出 → 更新 → 淡入，300ms 精確延遲
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-cyan-400 mr-2" style="font-size: 0.5rem;"></i>
+                        視覺層次優化
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        中間卡片預設 1.05x 縮放，成為視覺焦點
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-green-400 mr-2" style="font-size: 0.5rem;"></i>
+                        脈衝光暈效果
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        中間卡片懸停時觸發呼吸式紫色光暈
+                    </p>
+                </div>
+
+                <div class="feature-item">
+                    <h4 class="font-semibold text-white mb-2">
+                        <i class="fas fa-circle text-pink-400 mr-2" style="font-size: 0.5rem;"></i>
+                        點擊漣漪效果
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        所有卡片點擊時產生紫色漣漪擴散動畫
+                    </p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-bolt text-yellow-400 mr-2"></i>技術亮點</h3>
+            <ul class="text-gray-300 space-y-2">
+                <li><i class="fas fa-check text-green-400 mr-2"></i><strong>無縫輪播體驗</strong> - Crossfade + Ken Burns 效果</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i><strong>用戶友好設計</strong> - 懸停暫停 + 多種控制方式</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i><strong>視覺層次分明</strong> - 中間卡片焦點突出 + 脈衝光暈</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i><strong>細節打磨</strong> - 漣漪效果 + 標籤同步動畫</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i><strong>性能優先</strong> - GPU 加速 + 智能預加載</li>
+            </ul>
+
+            <h3><i class="fas fa-code text-blue-400 mr-2"></i>核心代碼實現</h3>
+            <pre><code class="language-css">/* 進度指示器 - 活躍狀態 */
+.indicator.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    width: 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.6);
+}
+
+/* 脈衝光暈效果 */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3),
+                    0 0 40px rgba(118, 75, 162, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(102, 126, 234, 0.5),
+                    0 0 60px rgba(118, 75, 162, 0.3);
+    }
+}</code></pre>
+
+            <div class="mt-6 pt-6 border-t border-gray-800">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-400">
+                        <i class="fas fa-user mr-2"></i>開發者：Claude Code + Jillian
+                    </div>
+                    <a href="https://www.notion.so/2958f9b3dd28816abf1cc4dad0a113f3" target="_blank" rel="noopener noreferrer" class="notion-link">
+                        <i class="fas fa-book"></i>
+                        <span>查看完整開發日誌</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- More changelog entries can be added here -->
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 mt-16">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 王一隆 流行音樂作品集. All Rights Reserved.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Designed with <i class="fas fa-heart text-purple-400"></i> by AURORA
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
