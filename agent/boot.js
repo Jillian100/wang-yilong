@@ -8,8 +8,9 @@
  * 功能：讓新的 Claude 實例快速載入完整記憶
  * 使用：node ~/AURORA/agent/boot.js
  * 作者：AURORA - Chief Design Officer
- * 版本：1.0
- * 日期：2025-10-31
+ * 版本：1.1
+ * 日期：2025-11-02
+ * 更新：新增 RAG 知識庫統計
  *
  * ============================================
  */
@@ -25,6 +26,8 @@ const AURORA_HOME = '/Users/jillian/AURORA';
 const MEMORY_DB = path.join(AURORA_HOME, 'agent/memory/longterm_db.json');
 const CLAUDE_MD = path.join(AURORA_HOME, 'CLAUDE.md');
 const PROJECTS_DIR = path.join(AURORA_HOME, 'F_web_design/projects/wang_yilong');
+const RAG_VECTOR_STORE = path.join(AURORA_HOME, 'agent/rag/vector_store.json');
+const KNOWLEDGE_DIR = path.join(AURORA_HOME, 'agent/knowledge');
 
 // ANSI 顏色代碼
 const colors = {
@@ -77,7 +80,7 @@ async function bootAurora() {
   // Step 1: 載入角色身份
   // ============================================
 
-  log('📖 Step 1/5: 載入角色身份...', 'green');
+  log('📖 Step 1/6: 載入角色身份...', 'green');
 
   try {
     if (fs.existsSync(CLAUDE_MD)) {
@@ -100,7 +103,7 @@ async function bootAurora() {
   // Step 2: 載入長期記憶
   // ============================================
 
-  log('🧠 Step 2/5: 載入長期記憶資料庫...', 'green');
+  log('🧠 Step 2/6: 載入長期記憶資料庫...', 'green');
 
   let memory = null;
 
@@ -125,7 +128,7 @@ async function bootAurora() {
   // Step 3: 掃描最新工作日誌
   // ============================================
 
-  log('📝 Step 3/5: 掃描最新工作日誌...', 'green');
+  log('📝 Step 3/6: 掃描最新工作日誌...', 'green');
 
   try {
     if (fs.existsSync(PROJECTS_DIR)) {
@@ -163,7 +166,7 @@ async function bootAurora() {
   // Step 4: 列出最近專案
   // ============================================
 
-  log('🎨 Step 4/5: 最近完成的專案...', 'green');
+  log('🎨 Step 4/6: 最近完成的專案...', 'green');
 
   if (memory && memory.projects && memory.projects.length > 0) {
     const recentProjects = memory.projects.slice(-3).reverse();
@@ -178,13 +181,68 @@ async function bootAurora() {
   console.log('');
 
   // ============================================
-  // Step 5: 生成記憶摘要
+  // Step 5: RAG 知識庫統計
   // ============================================
 
-  log('✨ Step 5/5: 生成記憶摘要...', 'green');
+  log('🧠 Step 5/6: 載入 RAG 知識庫...', 'green');
+
+  try {
+    if (fs.existsSync(RAG_VECTOR_STORE)) {
+      const vectorStore = JSON.parse(fs.readFileSync(RAG_VECTOR_STORE, 'utf-8'));
+      const stats = vectorStore.metadata?.stats || {};
+
+      log('  ✅ RAG 資料庫：已載入');
+      log(`  📊 總向量數：${colors.gold}${stats.totalDocuments || vectorStore.documents?.length || 0}${colors.reset}`);
+      log(`  📏 向量維度：${stats.dimensions || 384}`);
+      log(`  🤖 嵌入模型：${stats.model || 'Xenova/all-MiniLM-L6-v2'}`);
+
+      // 統計知識文檔
+      const knowledgeDocs = fs.existsSync(KNOWLEDGE_DIR)
+        ? fs.readdirSync(KNOWLEDGE_DIR).filter(f => f.endsWith('.md'))
+        : [];
+
+      if (knowledgeDocs.length > 0) {
+        log(`  📚 知識文檔：${colors.gold}${knowledgeDocs.length}${colors.reset} 個`);
+
+        // 列出設計大師
+        const masters = [
+          { file: 'typography_bringhurst.md', name: 'Bringhurst (Typography)' },
+          { file: 'color_theory_albers.md', name: 'Albers (Color Theory)' },
+          { file: 'usability_krug.md', name: 'Krug (Usability)' },
+          { file: 'design_psychology_norman.md', name: 'Norman (Psychology)' },
+          { file: 'css_secrets_verou.md', name: 'Verou (CSS Secrets)' }
+        ];
+
+        const loadedMasters = masters.filter(m =>
+          knowledgeDocs.includes(m.file)
+        );
+
+        if (loadedMasters.length > 0) {
+          log('  🎓 設計大師：');
+          loadedMasters.forEach(m => {
+            log(`     ✓ ${m.name}`);
+          });
+        }
+      }
+
+      log(`  📅 最後更新：${vectorStore.metadata?.lastUpdated || '未知'}`);
+    } else {
+      log('  ⚠️  警告：找不到 RAG 向量資料庫');
+    }
+  } catch (error) {
+    log(`  ❌ 錯誤：${error.message}`);
+  }
+
+  console.log('');
+
+  // ============================================
+  // Step 6: 生成記憶摘要
+  // ============================================
+
+  log('✨ Step 6/6: 生成記憶摘要...', 'green');
 
   if (memory && memory.knowledge_base) {
-    log('  📚 知識庫統計：');
+    log('  📚 記憶知識庫：');
     log(`     - 設計模式：${memory.knowledge_base.design_patterns?.length || 0} 條`);
     log(`     - 最佳實踐：${memory.knowledge_base.best_practices?.length || 0} 條`);
     log(`     - 學習記錄：${memory.learning_log?.length || 0} 條`);
