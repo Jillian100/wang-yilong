@@ -43,13 +43,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* AURORA Aesthetic DNA */
+        /* AURORA Aesthetic DNA - Enhanced Dark Theme */
         :root {
-            /* Colors */
+            /* AURORA Deep Dark Theme - CSS Secret: DRY Principle */
+            --color-black-deep: #050505;
             --color-black-soft: #0a0a0a;
+            --color-black-card: #0f0f0f;
             --color-white-pure: #ffffff;
+            --color-gray-100: #f8f8f8;
+            --color-gray-400: #a0a0a0;
             --color-gray-500: #737373;
+            --color-gray-700: #404040;
             --color-gray-800: #2a2a2a;
+            --color-gray-900: #1a1a1a;
 
             /* Aurora Gradients */
             --gradient-aurora-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -77,9 +83,14 @@
 
         body {
             font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--color-black-soft);
+            /* Enhanced deep dark background */
+            background-color: var(--color-black-deep);
             color: var(--color-white-pure);
             line-height: 1.5;
+            /* Subtle texture for depth */
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 0%, transparent 50%);
         }
 
         /* AURORA Animation: fadeInUp */
@@ -121,50 +132,68 @@
         .delay-300 { animation-delay: 300ms; }
         .delay-400 { animation-delay: 400ms; }
 
-        /* Navigation hover effect */
+        /* CSS Secret #26: Custom Underlines with gradient */
         .nav-link {
             position: relative;
+            display: inline-block;
             transition: color var(--duration-base) var(--ease-aurora);
+            /* 使用 background 而非 ::before 偽元素 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) no-repeat;
+            background-size: 0% 2px;
+            background-position: 0 100%;
+            /* CSS Secret #42: Elastic transition for underline */
+            transition: background-size 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                        color 300ms var(--ease-aurora);
+            padding-bottom: 2px;
         }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background: var(--gradient-aurora-1);
-            transition: width var(--duration-base) var(--ease-aurora);
+        .nav-link:hover {
+            background-size: 100% 2px;
         }
 
-        .nav-link:hover::before {
-            width: 100%;
-        }
-
-        /* Aurora gradient button */
+        /* Aurora gradient button - Enhanced with CSS Secret #42: Elastic Transitions */
         .btn-aurora {
             background: var(--gradient-aurora-1);
-            transition: all var(--duration-base) var(--ease-aurora);
+            /* CSS Secret #42: Elastic cubic-bezier for bouncy effect */
+            transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                        box-shadow 500ms var(--ease-aurora);
+            /* CSS Secret #15: One-sided shadow (bottom only) */
+            box-shadow: 0 5px 4px -4px rgba(102, 126, 234, 0.3);
         }
 
         .btn-aurora:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            /* Elastic bounce effect */
+            transform: translateY(-4px);
+            /* CSS Secret #15: Enhanced one-sided shadow */
+            box-shadow: 0 12px 8px -6px rgba(102, 126, 234, 0.5);
         }
 
-        /* Hero section */
+        .btn-aurora:active {
+            transform: translateY(-1px);
+            transition-duration: 100ms;
+        }
+
+        /* CSS Secret #6: Complex Background Patterns - Aurora Sky Effect */
         .hero-gradient {
-            background: radial-gradient(circle at 50% 0%, rgba(102, 126, 234, 0.1) 0%, transparent 60%);
+            /* Multi-layer aurora gradient for depth */
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 30%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 40%, rgba(79, 172, 254, 0.08) 0%, transparent 40%),
+                var(--color-black-deep);
         }
 
-        /* Dynamic Card Effects */
+        /* Dynamic Card Effects - Enhanced with CSS Secrets */
         .dynamic-card {
             position: relative;
             overflow: hidden;
-            transition: all 500ms var(--ease-aurora);
+            /* CSS Secret #42: Elastic transition */
+            transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                        box-shadow 500ms var(--ease-aurora);
             cursor: pointer;
+            /* CSS Secret #15: One-sided shadow (bottom + right) */
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.3),
+                        2px 0 6px -2px rgba(0, 0, 0, 0.2);
         }
 
         .dynamic-card::before {
@@ -199,9 +228,19 @@
 
         .dynamic-card .card-content {
             position: relative;
-            background: #0a0a0a;
+            /* CSS Secret #18: Frosted Glass Effect with fallback */
+            background: rgba(26, 26, 26, 0.8);
             border-radius: 0.5rem;
             height: 100%;
+        }
+
+        /* CSS Secret #18: Enhanced frosted glass with progressive enhancement */
+        @supports (backdrop-filter: blur(10px)) {
+            .dynamic-card .card-content {
+                background: rgba(26, 26, 26, 0.7);
+                backdrop-filter: blur(12px) saturate(180%);
+                -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
         }
 
         /* Rotating content animation */
@@ -285,25 +324,37 @@
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.6);
         }
 
-        /* 左右箭頭導航按鈕 */
+        /* CSS Secret #18: Frosted Glass Video Navigation Buttons */
         .video-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Enhanced frosted glass effect */
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: white;
             width: 40px;
             height: 40px;
+            /* CSS Secret #9: Flexible Ellipses */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             opacity: 0;
-            transition: all 400ms var(--ease-aurora);
+            /* CSS Secret #42: Elastic transition */
+            transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 3;
+            /* CSS Secret #15: One-sided shadow */
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CSS Secret #18: Progressive enhancement for backdrop-filter */
+        @supports (backdrop-filter: blur(10px)) {
+            .video-nav {
+                backdrop-filter: blur(12px) saturate(150%);
+                -webkit-backdrop-filter: blur(12px) saturate(150%);
+            }
         }
 
         .video-nav-prev {
@@ -321,12 +372,16 @@
         .video-nav:hover {
             background: rgba(102, 126, 234, 0.9);
             border-color: rgba(102, 126, 234, 0.5);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            /* Elastic bounce on hover */
+            transform: translateY(-50%) scale(1.15);
+            /* CSS Secret #2: Multiple borders using box-shadow */
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2),
+                        0 6px 16px rgba(102, 126, 234, 0.4);
         }
 
         .video-nav:active {
             transform: translateY(-50%) scale(0.95);
+            transition-duration: 100ms;
         }
 
         /* 中間卡片焦點突出 */
@@ -339,14 +394,15 @@
         }
 
         /* ========================================
-           移動端響應式優化
+           CSS Secret: 響應式設計最佳實踐
+           使用 rem、em、% 等靈活單位
            ======================================== */
         @media (max-width: 768px) {
-            /* 移動端：視頻導航按鈕調整 */
+            /* CSS Secret: Flexible sizing with relative units */
             .video-nav {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
+                width: 2.25rem;  /* 36px -> rem for better scaling */
+                height: 2.25rem;
+                font-size: 0.875rem;
                 opacity: 0.8; /* 移動端預設半透明可見 */
             }
 
@@ -428,16 +484,27 @@
             }
         }
 
-        /* 觸摸設備優化 */
+        /* CSS Secret #30: Extending Clickable Area for Touch Devices */
         @media (hover: none) and (pointer: coarse) {
             /* 觸摸設備：移除懸停效果，改為點擊觸發 */
             .video-nav {
                 opacity: 1; /* 觸摸設備上始終顯示 */
+                /* CSS Secret #30: 擴大觸摸區域 */
+                padding: 0.5rem;
             }
 
             /* 觸摸設備：卡片點擊反饋 */
             .dynamic-card:active {
                 transform: scale(0.98);
+                /* 即時視覺反饋 */
+                transition-duration: 100ms;
+            }
+
+            /* 按鈕觸摸優化 */
+            .btn-aurora {
+                /* 最小觸摸目標 44x44px (iOS Human Interface Guidelines) */
+                min-height: 44px;
+                min-width: 44px;
             }
         }
 

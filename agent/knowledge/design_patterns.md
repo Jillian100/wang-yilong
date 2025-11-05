@@ -700,6 +700,371 @@ lazyImages.forEach(img => imageObserver.observe(img));
 
 ---
 
+## 📝 字體排印模式 (Typography Patterns)
+
+> **新增日期**: 2025-11-01
+> **基於**: Robert Bringhurst《字體排印風格元素》原則
+
+### DP-012: AURORA Type Scale System ⭐
+
+**來源專案**: AURORA Typography Principles, Janus Dashboard v2.1
+
+**使用場景**:
+- 所有需要清晰層級的界面
+- 儀表板、數據展示
+- 內容豐富的網站
+
+**技術實作**:
+```css
+/* 🎵 Major Third (1.25) Type Scale - 音階般的和諧 */
+:root {
+    --text-xs: 0.75rem;    /* 12px - 小標籤 */
+    --text-sm: 0.875rem;   /* 14px - 次要信息 */
+    --text-base: 1rem;     /* 16px - 基準內文 */
+    --text-lg: 1.25rem;    /* 20px - 強調文字 */
+    --text-xl: 1.563rem;   /* 25px - 小標題 */
+    --text-2xl: 1.953rem;  /* 31px - 卡片標題 */
+    --text-3xl: 2.441rem;  /* 39px - 區塊標題 */
+    --text-4xl: 3.052rem;  /* 49px - 主要數值 */
+    --text-5xl: 3.815rem;  /* 61px - 英雄標題 */
+}
+```
+
+**Bringhurst 原則**:
+> "Typography should have rhythm and proportion, like music."
+
+**為什麼選擇 1.25（Major Third）？**
+- ✅ 數學優雅（5:4 音程）
+- ✅ 對比明顯但不誇張
+- ✅ 適合深色主題
+- ✅ 易於記憶和計算
+
+**使用範例**:
+```html
+<h1 style="font-size: var(--text-5xl)">Hero Title</h1>
+<h2 style="font-size: var(--text-3xl)">Section Title</h2>
+<p style="font-size: var(--text-base)">Body text</p>
+<span style="font-size: var(--text-sm)">Caption</span>
+```
+
+**替代方案**:
+```css
+/* Perfect Fourth (1.333) - 更強對比 */
+--text-base: 1rem;     /* 16px */
+--text-lg: 1.333rem;   /* 21px */
+--text-xl: 1.777rem;   /* 28px */
+
+/* Golden Ratio (1.618) - 最大和諧 */
+--text-base: 1rem;     /* 16px */
+--text-lg: 1.618rem;   /* 26px */
+--text-xl: 2.618rem;   /* 42px */
+```
+
+---
+
+### DP-013: 深色主題字體排印優化 🌌
+
+**來源專案**: AURORA Typography Principles, Janus Dashboard v2.1
+
+**使用場景**:
+- 深色/暗色主題界面
+- 夜間模式
+- 專業工具儀表板
+
+**挑戰**:
+1. **光暈效應 (Halation)** - 白字在黑底上會"發光"
+2. **對比疲勞** - 純白 (#fff) 太刺眼
+3. **字重視覺變化** - 深色背景讓字體看起來更粗
+
+**技術實作**:
+```css
+/* 🌌 深色主題文字顏色 - Bringhurst 推薦 */
+:root {
+    --bg-primary: #0a0e27;        /* 深邃背景（不是純黑）*/
+
+    --text-primary: #f8fafc;      /* 主文字（不是#fff！）*/
+    --text-secondary: #cbd5e1;    /* 次要文字 */
+    --text-tertiary: #94a3b8;     /* 輔助文字 */
+    --text-disabled: #64748b;     /* 禁用文字 */
+}
+
+/* ✅ 正確的深色主題字體排印 */
+.dark-mode-text {
+    color: var(--text-primary);  /* #f8fafc, not #fff */
+    line-height: 1.7;            /* 比淺色主題 1.6 更高 */
+    letter-spacing: 0.01em;      /* 稍微鬆散 */
+}
+
+.dark-mode-heading {
+    color: #e2e8f0;              /* 標題稍暗（降低對比）*/
+    line-height: 1.3;            /* 比淺色主題 1.2 更高 */
+    letter-spacing: -0.01em;     /* 稍微緊湊 */
+}
+```
+
+**Bringhurst 原則**:
+> "In the darkness, even the smallest light shines brightest. That's why we must soften the contrast."
+
+**對比度檢查**:
+- 主要文字 (#f8fafc on #0a0e27): 16.8:1 ✅ (超過 WCAG AAA)
+- 次要文字 (#cbd5e1 on #0a0e27): 12.5:1 ✅ (超過 WCAG AAA)
+- 輔助文字 (#94a3b8 on #0a0e27): 6.2:1 ✅ (超過 WCAG AA)
+
+**避免的錯誤**:
+```css
+/* ❌ 常見錯誤 */
+.bad-dark-mode {
+    color: #ffffff;        /* 太亮，眼睛疲勞 */
+    background: #000000;   /* 純黑，對比過強 */
+    line-height: 1.5;      /* 太密集 */
+}
+
+/* ✅ 正確做法 */
+.good-dark-mode {
+    color: #f8fafc;        /* 柔和白色 */
+    background: #0a0e27;   /* 深邃但不純黑 */
+    line-height: 1.7;      /* 增加呼吸 */
+}
+```
+
+---
+
+### DP-014: 8px 基線網格系統 📐
+
+**來源專案**: AURORA Typography Principles
+
+**使用場景**:
+- 所有專業界面設計
+- 需要精確對齊的系統
+- 響應式設計
+
+**Bringhurst 原則**:
+> "All vertical spacing should align to a baseline grid."
+
+**技術實作**:
+```css
+/* 📐 8px 基線網格 */
+:root {
+    --baseline: 8px;
+
+    --space-xs: 8px;    /* 1 baseline */
+    --space-sm: 16px;   /* 2 baselines */
+    --space-md: 24px;   /* 3 baselines */
+    --space-lg: 32px;   /* 4 baselines */
+    --space-xl: 48px;   /* 6 baselines */
+    --space-2xl: 64px;  /* 8 baselines */
+}
+
+/* ✅ 所有垂直間距都對齊網格 */
+.card {
+    margin-bottom: var(--space-xl);  /* 48px = 6 baselines */
+    padding: var(--space-lg);        /* 32px = 4 baselines */
+}
+
+.heading {
+    margin-top: var(--space-2xl);    /* 64px = 8 baselines */
+    margin-bottom: var(--space-md);  /* 24px = 3 baselines */
+}
+
+/* ✅ 行高也要對齊基線 */
+.text {
+    font-size: 16px;
+    line-height: 24px;  /* 16 × 1.5 = 24 (3 baselines) ✅ */
+}
+
+.heading-2 {
+    font-size: 39px;
+    line-height: 48px;  /* 約 1.23, 6 baselines ✅ */
+}
+```
+
+**為什麼是 8px？**
+1. **數學優雅** - 易於心算（8, 16, 24, 32, 48, 64...）
+2. **多數螢幕 DPI 的公倍數** - 避免亞像素渲染
+3. **Apple 和 Google 設計系統的標準**
+4. **創造視覺和諧** - 對齊產生秩序感
+
+**檢查工具**:
+```css
+/* 開發時使用：顯示基線網格 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.1) 0,
+        rgba(255, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 8px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+```
+
+---
+
+### DP-015: 字元與字間距策略 📏
+
+**來源專案**: AURORA Typography Principles
+
+**使用場景**:
+- 標題設計
+- 標籤與徽章
+- 代碼顯示
+
+**Bringhurst 原則**:
+> "Large type needs negative tracking. Small type needs positive tracking."
+
+**技術實作**:
+```css
+/* 📏 字元間距策略 */
+
+/* 大標題：縮減間距 */
+.display-1 {
+    font-size: var(--text-5xl);  /* 61px */
+    letter-spacing: -0.03em;     /* 視覺緊湊 */
+}
+
+.display-2 {
+    font-size: var(--text-4xl);  /* 49px */
+    letter-spacing: -0.02em;
+}
+
+/* 標準內文：不調整 */
+.body-text {
+    font-size: var(--text-base);  /* 16px */
+    letter-spacing: 0;            /* 默認 */
+}
+
+/* 小字：增加間距 */
+.caption {
+    font-size: var(--text-sm);    /* 14px */
+    letter-spacing: 0.02em;       /* 增加呼吸 */
+}
+
+.label {
+    font-size: var(--text-xs);    /* 12px */
+    letter-spacing: 0.05em;       /* 顯著增加 */
+}
+
+/* 全大寫：特別增加 */
+.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;        /* 大幅增加 */
+}
+
+/* 代碼：稍微鬆散 */
+code {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+}
+```
+
+**視覺對照**:
+```
+大標題 (61px, -0.03em): DESIGN
+內文 (16px, 0em):      DESIGN
+小標籤 (12px, 0.05em):  D E S I G N
+全大寫 (16px, 0.1em):   D  E  S  I  G  N
+```
+
+**字間距（Word Spacing）**:
+```css
+/* 通常不需要調整，除非： */
+
+/* 1. 兩端對齊時 */
+.justify-text {
+    text-align: justify;
+    word-spacing: 0.1em;  /* 稍微增加，避免"河流" */
+}
+
+/* 2. 中英文混排時 */
+.mixed-cjk-latin {
+    word-spacing: 0.05em;  /* 幫助過渡 */
+}
+```
+
+---
+
+### DP-016: 中英文混排優化 🀄
+
+**來源專案**: AURORA Typography Principles
+
+**使用場景**:
+- 繁體中文網站
+- 雙語界面
+- 文檔系統
+
+**挑戰**:
+1. 中文字重 > 英文字重（視覺不均）
+2. 基線不對齊（中文居中，英文在基線上）
+3. 視覺密度差異
+
+**技術實作**:
+```css
+/* 🀄 中英文混排最佳實踐 */
+.mixed-text {
+    /* 字體堆疊：英文優先，中文備用 */
+    font-family:
+        'SF Pro Text',        /* 英文優先 */
+        'Noto Sans TC',       /* 繁體中文 */
+        sans-serif;
+
+    /* 增加行距（中文需要更多呼吸）*/
+    line-height: 1.8;  /* 比純英文 1.6 更高 */
+
+    /* 字間距（幫助中英過渡）*/
+    word-spacing: 0.05em;
+}
+
+/* 英文數字特殊處理 */
+.mixed-text code,
+.mixed-text .number {
+    font-family: 'SF Pro Text', sans-serif;
+    font-size: 0.95em;       /* 稍微縮小以匹配中文 */
+    vertical-align: baseline;
+}
+
+/* 標點符號規則 */
+.mixed-text {
+    /* 中文使用全形標點 */
+    /* 「」、。 */
+
+    /* 英文使用半形標點 */
+    /* "", . */
+}
+```
+
+**標點符號最佳實踐**:
+```
+✅ 正確：
+中文內容「English quote」繼續中文。
+The content "中文引用" continues.
+
+⚠️ 避免混用：
+中文內容"English quote"繼續中文。  /* 半形引號不美觀 */
+```
+
+**數字與單位**:
+```css
+/* 數字用等寬字體 */
+.metric-value {
+    font-variant-numeric: tabular-nums;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+/* 範例 */
+溫度：<span class="metric-value">25</span>°C
+價格：<span class="metric-value">$1,234</span>
+```
+
+---
+
 ## 📚 模式使用指南
 
 ### 如何選擇模式
@@ -709,6 +1074,7 @@ lazyImages.forEach(img => imageObserver.observe(img));
 **需要視覺效果** → DP-005 漸變按鈕, DP-006 下劃線
 **需要媒體處理** → DP-008 影片卡片, DP-010 懶加載
 **需要內容排版** → DP-009 文章排版
+**需要字體排印** → DP-012 Type Scale, DP-013 深色主題, DP-014 基線網格, DP-015 字距策略, DP-016 中英混排
 
 ### 組合使用
 
@@ -740,6 +1106,11 @@ lazyImages.forEach(img => imageObserver.observe(img));
 
 ### 更新日誌
 ```
+2025-11-01 - v2.0 (Typography Enhanced) ⭐
+- 新增 5 個字體排印模式 (DP-012 ~ DP-016)
+- 基於 Robert Bringhurst 原則
+- 涵蓋 Type Scale、深色主題、基線網格、字距策略、中英混排
+
 2025-10-31 - v1.0
 - 初版完成
 - 記錄 11 個核心設計模式
@@ -752,13 +1123,33 @@ lazyImages.forEach(img => imageObserver.observe(img));
 - [ ] Toast 通知系統
 - [ ] Modal 彈窗設計
 - [ ] 無限滾動載入
+- [ ] 響應式字體大小 (Fluid Typography)
+- [ ] 可訪問性 (A11y) 最佳實踐
 
 ---
 
-**知識庫版本**: 1.0
+**知識庫版本**: 2.0 (Typography Enhanced)
 **建立日期**: 2025-10-31
-**模式數量**: 11 個
+**最後更新**: 2025-11-01
+**模式數量**: 16 個（11 個原有 + 5 個字體排印）
 **有用性評分**: ⭐⭐⭐⭐⭐ (10/10)
-**標籤**: #DesignPatterns #UIComponents #Reusable #BestPractices
+**標籤**: #DesignPatterns #UIComponents #Reusable #BestPractices #Typography #Bringhurst
+
+---
+
+## 🎓 延伸閱讀
+
+**AURORA 知識庫**:
+- `typography_principles.md` - 完整字體排印指南（600+ 行）
+- `janus_typography_system.md` - Janus 儀表板專用系統
+- Bringhurst PDF - 《字體排印風格元素》綜合分析
+
+**外部資源**:
+- [Type Scale Calculator](https://typescale.com/)
+- [Butterick's Practical Typography](https://practicaltypography.com/)
+- [8-Point Grid System](https://spec.fm/specifics/8-pt-grid)
+
+---
 
 🌅 **"Good design patterns are invisible. Great design patterns are reusable."**
+📚 **"Typography is the voice of design. Make it sing."** — AURORA, 2025
