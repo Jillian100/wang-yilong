@@ -1,0 +1,674 @@
+/**
+ * AURORA Scrollytelling Platform - Core Styles
+ *
+ * 核心功能：
+ * - #121212 深色美學
+ * - 絲滑滾動效果 (CSS Scroll Snap)
+ * - 響應式設計
+ * - AURORA 字體系統
+ *
+ * Author: AURORA (Chief Design Officer)
+ * Date: 2025-11-05
+ */
+
+/* ========================================== */
+/* AURORA 字體載入                             */
+/* ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+/* ========================================== */
+/* CSS Reset & Base Styles                   */
+/* ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #121212;
+    color: #F8FAFC;
+    overflow-x: hidden;
+}
+
+/* ========================================== */
+/* AURORA 色彩系統                            */
+/* ========================================== */
+:root {
+    /* 背景色系 */
+    --aurora-bg-primary: #121212;
+    --aurora-bg-secondary: #1a1a1a;
+    --aurora-bg-accent: #0a0e27;
+
+    /* 文字色系 */
+    --aurora-text-primary: #F8FAFC;
+    --aurora-text-secondary: #CCCCCC;
+    --aurora-text-dim: #999999;
+
+    /* 品牌色系 */
+    --aurora-purple: #6366f1;
+    --aurora-purple-light: #8b5cf6;
+    --aurora-blue: #3b82f6;
+    --aurora-green: #10b981;
+    --aurora-gold: #f59e0b;
+    --aurora-rose: #ec4899;
+
+    /* 間距系統（8px 基準）*/
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2rem;     /* 32px */
+    --space-xl: 3rem;     /* 48px */
+    --space-2xl: 4rem;    /* 64px */
+
+    /* 動畫時間 */
+    --duration-fast: 0.2s;
+    --duration-normal: 0.4s;
+    --duration-slow: 0.6s;
+
+    /* 緩動曲線 */
+    --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================== */
+/* 絲滑滾動畫布 (Smooth Scrolling Canvas)     */
+/* ========================================== */
+.aurora-canvas {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+    scroll-behavior: smooth;
+    /* 移除 3D 渲染，避免空白問題 */
+}
+
+/* 場景容器 */
+.aurora-scene {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: var(--space-lg);
+}
+
+/* ========================================== */
+/* Scene Type: Hero (封面場景)                */
+/* ========================================== */
+.scene-hero {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;  /* 視差效果 */
+    text-align: center;
+}
+
+.scene-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 18, 18, 0.5);  /* 深色遮罩 */
+    z-index: 1;
+}
+
+.scene-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    animation: fadeInUp 1s var(--easing-smooth);
+}
+
+.scene-hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 300;
+    color: var(--aurora-text-primary);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+}
+
+.scene-hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 400;
+    color: var(--aurora-text-secondary);
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+}
+
+.scene-hero-scroll-hint {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: bounce 2s infinite;
+}
+
+.scene-hero-scroll-hint::after {
+    content: '↓';
+    font-size: 2rem;
+    color: var(--aurora-purple);
+}
+
+/* ========================================== */
+/* Scene Type: Split (左右分割)               */
+/* ========================================== */
+.scene-split {
+    padding: 0;
+}
+
+.scene-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.scene-split-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-2xl);
+    background-color: var(--aurora-bg-primary);
+}
+
+.scene-split-text h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--aurora-text-primary);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+}
+
+.scene-split-text p {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.8;
+    color: var(--aurora-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.scene-split-text ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.scene-split-text ul li {
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-sm);
+    position: relative;
+}
+
+.scene-split-text ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--aurora-purple);
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.scene-split-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--aurora-bg-secondary);
+    overflow: hidden;
+}
+
+.scene-split-media img,
+.scene-split-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 反向佈局（文右影左）*/
+.scene-split.layout-text-right .scene-split-container {
+    grid-template-columns: 1fr 1fr;
+    direction: rtl;
+}
+
+.scene-split.layout-text-right .scene-split-text,
+.scene-split.layout-text-right .scene-split-media {
+    direction: ltr;
+}
+
+/* ========================================== */
+/* Scene Type: Full Media (全螢幕媒體)        */
+/* ========================================== */
+.scene-full-media {
+    padding: 0;
+}
+
+.scene-full-media-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.scene-full-media video,
+.scene-full-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scene-full-media-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-2xl);
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.9), transparent);
+    text-align: center;
+}
+
+.scene-full-media-overlay-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--aurora-text-primary);
+}
+
+/* ========================================== */
+/* 響應式設計 (Mobile First)                  */
+/* ========================================== */
+
+/* 平板 */
+@media (max-width: 1023px) {
+    .scene-split-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .scene-split-text {
+        padding: var(--space-xl);
+    }
+
+    .scene-split-media {
+        min-height: 50vh;
+    }
+}
+
+/* 手機 */
+@media (max-width: 767px) {
+    .aurora-scene {
+        padding: var(--space-md);
+    }
+
+    .scene-hero-title {
+        font-size: 2rem;
+    }
+
+    .scene-hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .scene-split-text {
+        padding: var(--space-lg);
+    }
+
+    .scene-full-media-overlay {
+        padding: var(--space-lg);
+    }
+}
+
+/* ========================================== */
+/* 動畫效果                                   */
+/* ========================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+/* 滾動觸發淡入 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-slow) var(--easing-smooth),
+                transform var(--duration-slow) var(--easing-smooth);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================== */
+/* 🎭 劇場式螢幕體驗：視差 & 深度效果          */
+/* ========================================== */
+
+/* ========================================== */
+/* 🌌 進階視差場景（多層背景）                */
+/* ========================================== */
+.scene-parallax {
+    padding: 0;
+    position: relative;
+    min-height: 150vh;  /* 確保有足夠滾動空間 */
+}
+
+.parallax-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* 視差圖層系統 */
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;  /* 稍微放大，避免邊緣露出 */
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+}
+
+/* 不同深度的圖層 */
+.parallax-layer[data-depth="0"] {
+    /* 背景層：不動 */
+}
+
+.parallax-layer[data-depth="0.2"] {
+    /* 遠景層：移動 20% */
+}
+
+.parallax-layer[data-depth="0.5"] {
+    /* 中景層：移動 50% */
+}
+
+.parallax-layer[data-depth="0.8"] {
+    /* 近景層：移動 80% */
+}
+
+.parallax-layer[data-depth="1.0"] {
+    /* 前景層：移動 100% */
+}
+
+/* 視差文字覆層 */
+.parallax-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    color: var(--aurora-text-primary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.parallax-text h2 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+/* 深度動畫（滾動觸發）*/
+.depth-element {
+    transition: transform 0.6s var(--easing-smooth);
+}
+
+.depth-element.in-view {
+    transform: scale(1.05);  /* 簡化為只有縮放 */
+}
+
+/* 浮動效果（微妙的上下移動）*/
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* 漸層光澤效果（劇場燈光）*/
+.scene-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.scene-glow::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(99, 102, 241, 0.15) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 1s var(--easing-smooth);
+    pointer-events: none;
+}
+
+.scene-glow.active::after {
+    opacity: 1;
+}
+
+/* ========================================== */
+/* 🎯 滾動進度指示器                          */
+/* ========================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-blue));
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* ========================================== */
+/* ✨ 光澤掃過效果（增強版）                   */
+/* ========================================== */
+.scene-split-media,
+.scene-full-media-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.scene-split-media::before,
+.scene-full-media-container::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.aurora-scene.in-view .scene-split-media::before,
+.aurora-scene.in-view .scene-full-media-container::before {
+    transform: translate(100%, 100%) rotate(45deg);
+}
+
+/* ========================================== */
+/* 🎨 Hover 微動畫增強                        */
+/* ========================================== */
+.scene-split-media img,
+.scene-split-media video {
+    transition: transform 0.4s var(--easing-smooth);
+}
+
+.scene-split-media:hover img,
+.scene-split-media:hover video {
+    transform: scale(1.05);
+}
+
+/* ========================================== */
+/* 工具類別                                   */
+/* ========================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-purple {
+    color: var(--aurora-purple);
+}
+
+.bg-purple {
+    background-color: var(--aurora-purple);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--aurora-purple) 0%, var(--aurora-purple-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================== */
+/* 🎬 PNG 序列動畫場景                        */
+/* ========================================== */
+.scene-image-sequence {
+    padding: 0;
+    height: 300vh;  /* 預設滾動高度 */
+    position: relative;
+}
+
+.sequence-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--aurora-bg-primary);
+    overflow: hidden;
+}
+
+.sequence-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* 載入提示 */
+.sequence-container::after {
+    content: 'Loading sequence...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--aurora-text-secondary);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ========================================== */
+/* 🎮 Three.js WebGL 3D 場景                  */
+/* ========================================== */
+.scene-threejs {
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+}
+
+.threejs-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.threejs-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 3D 場景覆層文字 */
+.threejs-overlay {
+    position: absolute;
+    bottom: var(--space-2xl);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    color: var(--aurora-text-primary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.threejs-overlay h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    margin: 0 0 var(--space-sm) 0;
+    letter-spacing: 0.05em;
+}
+
+.threejs-overlay p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--aurora-text-secondary);
+    margin: 0;
+}
+
+/* 載入提示 */
+.threejs-container::after {
+    content: 'Initializing 3D scene...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--aurora-text-secondary);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+}

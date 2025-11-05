@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js 3D 場景展示</title>
+
+    <!-- AURORA Scrollytelling Styles -->
+    <link rel="stylesheet" href="../static/css/aurora-scrollytelling.css">
+</head>
+<body>
+<div class="aurora-canvas">
+
+<section class="aurora-scene scene-hero" style="background: linear-gradient(135deg, #0a0e27 0%, #6366f1 100%);">
+    <div class="scene-hero-content">
+        <h1 class="scene-hero-title">AURORA 3D Experience</h1>
+        <p class="scene-hero-subtitle">WebGL × Three.js × GSAP</p>
+    </div>
+    <div class="scene-hero-scroll-hint"></div>
+</section>
+
+<section class="aurora-scene scene-threejs">
+    <div class="threejs-container">
+        <canvas
+            class="threejs-canvas"
+            data-type="product"
+            data-color="#6366f1"
+            data-auto-rotate="false"
+            data-scroll-rotation="true"
+            data-scroll-zoom="true"
+            data-scroll-color="true"
+            data-color-start="#6366f1"
+            data-color-end="#ec4899">
+        </canvas>
+        <div class="threejs-overlay">
+            <h2>3D 產品展示</h2>
+            <p>隨滾動旋轉、放大、變色</p>
+        </div>
+    </div>
+</section>
+
+<section class="aurora-scene scene-threejs">
+    <div class="threejs-container">
+        <canvas
+            class="threejs-canvas"
+            data-type="particles"
+            data-color="#10b981"
+            data-auto-rotate="true"
+            data-scroll-rotation="true">
+        </canvas>
+        <div class="threejs-overlay">
+            <h2>粒子宇宙</h2>
+            <p>5000 個粒子組成的星空</p>
+        </div>
+    </div>
+</section>
+
+<section class="aurora-scene scene-threejs">
+    <div class="threejs-container">
+        <canvas
+            class="threejs-canvas"
+            data-type="text"
+            data-color="#f59e0b"
+            data-scroll-rotation="true"
+            data-scroll-color="true"
+            data-color-start="#f59e0b"
+            data-color-end="#ec4899">
+        </canvas>
+        <div class="threejs-overlay">
+            <h2>3D 文字動畫</h2>
+            <p>扭結繩（TorusKnot）示範</p>
+        </div>
+    </div>
+</section>
+
+<section class="aurora-scene scene-hero" style="background: linear-gradient(135deg, #6366f1 0%, #0a0e27 100%);">
+    <div class="scene-hero-content">
+        <h1 class="scene-hero-title">探索更多可能</h1>
+        <p class="scene-hero-subtitle">AURORA Scrollytelling Platform</p>
+    </div>
+</section>
+
+</div><!-- .aurora-canvas -->
+
+<!-- GSAP Animation Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Three.js Library (最新穩定版) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<!-- AURORA Scrollytelling JavaScript -->
+<script src="../static/js/scroll-controller.js"></script>
+<script src="../static/js/gsap-animations.js"></script>
+<script src="../static/js/threejs-scenes.js"></script>
+
+</body>
+</html>
